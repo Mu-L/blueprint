@@ -56,89 +56,78 @@ const ITEMS_FOR_ALWAYS_RENDER: BreadcrumbProps[] = [
     { icon: "document", text: "image.jpg", current: true },
 ];
 
-export class BreadcrumbsExample extends React.PureComponent<ExampleProps, BreadcrumbsExampleState> {
-    public state: BreadcrumbsExampleState = {
-        alwaysRenderOverflow: false,
-        collapseFrom: Boundary.START,
-        renderCurrentAsInput: false,
-        width: 50,
-    };
+export const BreadcrumbsExample: React.FC<ExampleProps> = props => {
+    const [alwaysRenderOverflow, setAlwaysRenderOverflow] = React.useState(false);
+    const [collapseFrom, setCollapseFrom] = React.useState<Boundary>(Boundary.START);
+    const [renderCurrentAsInput, setRenderCurrentAsInput] = React.useState(false);
+    const [width, setWidth] = React.useState(50);
 
-    private handleChangeCollapse = handleStringChange(collapseFrom =>
-        this.setState({ collapseFrom: collapseFrom as Boundary }),
-    );
+    const handleChangeCollapse = handleStringChange(value => setCollapseFrom(value as Boundary));
 
-    private breadcrumbWidthLabelId = "num-visible-items-label";
+    const handleChangeRenderCurrentAsInput = () => setRenderCurrentAsInput(!renderCurrentAsInput);
 
-    public render() {
-        const options = (
-            <>
-                <H5>Props</H5>
-                <RadioGroup
-                    name="collapseFrom"
-                    inline={true}
-                    label="Collapse from"
-                    onChange={this.handleChangeCollapse}
-                    options={COLLAPSE_FROM_RADIOS}
-                    selectedValue={this.state.collapseFrom.toString()}
-                />
-                <Checkbox
-                    name="alwaysRenderOverflow"
-                    label="Always render overflow"
-                    onChange={this.handleChangeAlwaysRenderOverflow}
-                    checked={this.state.alwaysRenderOverflow}
-                />
-                <Checkbox
-                    name="renderCurrent"
-                    label="Render current breadcrumb as input"
-                    onChange={this.handleChangeRenderCurrentAsInput}
-                    checked={this.state.renderCurrentAsInput}
-                />
-                <H5>Example</H5>
-                <Label id={this.breadcrumbWidthLabelId}>Width</Label>
-                <Slider
-                    labelRenderer={this.renderLabel}
-                    labelStepSize={50}
-                    max={100}
-                    onChange={this.handleChangeWidth}
-                    showTrackFill={false}
-                    value={this.state.width}
-                    handleHtmlProps={{ "aria-labelledby": this.breadcrumbWidthLabelId }}
-                />
-            </>
-        );
+    const handleChangeAlwaysRenderOverflow = () => setAlwaysRenderOverflow(!alwaysRenderOverflow);
 
-        const { collapseFrom, renderCurrentAsInput, width, alwaysRenderOverflow } = this.state;
-        return (
-            <Example options={options} {...this.props}>
-                <Card elevation={0} style={{ width: `${width}%` }}>
-                    <Breadcrumbs
-                        collapseFrom={collapseFrom}
-                        items={alwaysRenderOverflow ? ITEMS_FOR_ALWAYS_RENDER : ITEMS}
-                        currentBreadcrumbRenderer={renderCurrentAsInput ? this.renderBreadcrumbInput : undefined}
-                        overflowListProps={{ alwaysRenderOverflow }}
-                    />
-                </Card>
-            </Example>
-        );
-    }
-
-    private renderLabel = (value: number) => {
-        return `${value}%`;
-    };
-
-    private handleChangeWidth = (width: number) => this.setState({ width });
-
-    private handleChangeRenderCurrentAsInput = () =>
-        this.setState({ renderCurrentAsInput: !this.state.renderCurrentAsInput });
-
-    private handleChangeAlwaysRenderOverflow = () =>
-        this.setState({ alwaysRenderOverflow: !this.state.alwaysRenderOverflow });
-
-    private renderBreadcrumbInput = ({ text }: BreadcrumbProps) => {
+    const renderBreadcrumbInput = ({ text }: BreadcrumbProps) => {
         return <BreadcrumbInput defaultValue={typeof text === "string" ? text : undefined} />;
     };
-}
+
+    const breadcrumbWidthLabelId = "num-visible-items-label";
+
+    const options = (
+        <>
+            <H5>Props</H5>
+            <RadioGroup
+                name="collapseFrom"
+                inline={true}
+                label="Collapse from"
+                onChange={handleChangeCollapse}
+                options={COLLAPSE_FROM_RADIOS}
+                selectedValue={collapseFrom.toString()}
+            />
+            <Checkbox
+                name="alwaysRenderOverflow"
+                label="Always render overflow"
+                onChange={handleChangeAlwaysRenderOverflow}
+                checked={alwaysRenderOverflow}
+            />
+            <Checkbox
+                name="renderCurrent"
+                label="Render current breadcrumb as input"
+                onChange={handleChangeRenderCurrentAsInput}
+                checked={renderCurrentAsInput}
+            />
+            <H5>Example</H5>
+            <Label id={breadcrumbWidthLabelId}>Width</Label>
+            <Slider
+                labelRenderer={renderLabel}
+                labelStepSize={50}
+                max={100}
+                onChange={setWidth}
+                showTrackFill={false}
+                value={width}
+                handleHtmlProps={{ "aria-labelledby": breadcrumbWidthLabelId }}
+            />
+        </>
+    );
+
+    return (
+        <Example options={options} {...props}>
+            <Card elevation={0} style={{ width: `${width}%` }}>
+                <Breadcrumbs
+                    collapseFrom={collapseFrom}
+                    items={alwaysRenderOverflow ? ITEMS_FOR_ALWAYS_RENDER : ITEMS}
+                    currentBreadcrumbRenderer={renderCurrentAsInput ? renderBreadcrumbInput : undefined}
+                    overflowListProps={{ alwaysRenderOverflow }}
+                />
+            </Card>
+        </Example>
+    );
+};
+
+const renderLabel = (value: number) => {
+    return `${value}%`;
+};
 
 const BreadcrumbInput: React.FC<BreadcrumbProps & { defaultValue: string | undefined }> = props => {
     const [text, setText] = React.useState(props.defaultValue ?? "");
