@@ -26,12 +26,11 @@ import { IntentSelect } from "./common/intentSelect";
 export const CalloutExample: React.FC<DocsExampleProps> = props => {
     const [compact, setCompact] = React.useState(false);
     const [contentIndex, setContentIndex] = React.useState(0);
-    const [showTitle, setShowTitle] = React.useState(true);
     const [icon, setIcon] = React.useState<IconName>();
     const [intent, setIntent] = React.useState<Intent>();
     const [minimal, setMinimal] = React.useState(false);
+    const [showTitle, setShowTitle] = React.useState(true);
 
-    /* eslint-disable react/jsx-key */
     const children = [
         <React.Fragment>
             Long-form information about the important content. This text is styled as{" "}
@@ -42,7 +41,6 @@ export const CalloutExample: React.FC<DocsExampleProps> = props => {
         <Button text="Example button" intent="primary" />,
         undefined,
     ][contentIndex];
-    /* eslint-enable react/jsx-key */
 
     const options = (
         <>
@@ -68,8 +66,11 @@ export const CalloutExample: React.FC<DocsExampleProps> = props => {
     return (
         <Example options={options} {...props}>
             <Callout
-                {...{ compact, intent, icon, minimal }}
-                title={showTitle ? "Visually important content" : undefined}
+                icon={icon}
+                intent={intent}
+                title={showTitle ? "Title" : undefined}
+                compact={compact}
+                minimal={minimal}
             >
                 {children}
             </Callout>
