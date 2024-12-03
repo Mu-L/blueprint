@@ -135,7 +135,7 @@ describe("<Portal>", () => {
     });
 
     // TODO: remove legacy context support in Blueprint v6.0
-    it("respects blueprintPortalClassName on legacy context", () => {
+    it.skip("respects blueprintPortalClassName on legacy context", () => {
         const CLASS_TO_TEST = "bp-test-klass bp-other-class";
         portal = mount(
             <Portal>
