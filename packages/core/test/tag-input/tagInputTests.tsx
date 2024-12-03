@@ -211,8 +211,10 @@ describe("<TagInput>", () => {
         it("does not clear the input if onAdd returns false", () => {
             const onAdd = sinon.stub().returns(false);
             const wrapper = mountTagInput(onAdd);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, NEW_VALUE);
         });
 
@@ -382,8 +384,10 @@ describe("<TagInput>", () => {
         it("does not clear the input if onChange returns false", () => {
             const onChange = sinon.stub().returns(false);
             const wrapper = mount(<TagInput onChange={onChange} values={VALUES} />);
-            wrapper.setState({ inputValue: NEW_VALUE });
-            pressEnterInInput(wrapper, NEW_VALUE);
+            React.act(() => {
+                wrapper.setState({ inputValue: NEW_VALUE });
+                pressEnterInInput(wrapper, NEW_VALUE);
+            });
             assert.strictEqual(wrapper.state().inputValue, NEW_VALUE);
         });
 

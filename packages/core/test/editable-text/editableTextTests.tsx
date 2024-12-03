@@ -228,15 +228,15 @@ describe("<EditableText>", () => {
             const confirmSpy = spy();
             const wrapper = mount(<EditableText isEditing={true} onConfirm={confirmSpy} multiline={true} />);
             simulateHelper(wrapper, "control", { ctrlKey: true, key: "Enter" });
-            wrapper.setState({ isEditing: true });
+            React.act(() => wrapper.setState({ isEditing: true }));
             simulateHelper(wrapper, "meta", { metaKey: true, key: "Enter" });
-            wrapper.setState({ isEditing: true });
+            React.act(() => wrapper.setState({ isEditing: true }));
             simulateHelper(wrapper, "shift", {
                 key: "Enter",
                 preventDefault: (): void => undefined,
                 shiftKey: true,
             });
-            wrapper.setState({ isEditing: true });
+            React.act(() => wrapper.setState({ isEditing: true }));
             simulateHelper(wrapper, "alt", {
                 altKey: true,
                 key: "Enter",

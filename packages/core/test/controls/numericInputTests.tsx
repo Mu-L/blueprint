@@ -1097,8 +1097,11 @@ describe("<NumericInput>", () => {
             incrementButton.simulate("mousedown", { shiftKey: true });
             expect(component.find("input").prop("value")).to.equal("1.101");
 
-            // one significant digit too many
-            setNextValue(component, "1.0001");
+            React.act(() => {
+                // one significant digit too many
+                setNextValue(component, "1.0001");
+            });
+
             incrementButton.simulate("mousedown", { altKey: true });
             expect(component.find("input").prop("value")).to.equal("1.001");
         });
@@ -1361,7 +1364,9 @@ describe("<NumericInput>", () => {
                 minorStepSize: null,
             });
 
-            setNextValue(component, "3e2"); // i.e. 300
+            React.act(() => {
+                setNextValue(component, "3e2"); // i.e. 300
+            });
 
             simulateIncrement(component);
 

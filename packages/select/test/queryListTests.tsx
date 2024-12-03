@@ -272,7 +272,9 @@ describe("<QueryList>", () => {
             const pastedValue2 = item2.title;
             const pastedValue3 = item3.title;
 
-            handlePaste([pastedValue1, pastedValue2, pastedValue3]);
+            React.act(() => {
+                handlePaste([pastedValue1, pastedValue2, pastedValue3]);
+            });
 
             assert.isTrue(onItemsPaste.calledOnce);
             // Emits all three items.
@@ -293,7 +295,9 @@ describe("<QueryList>", () => {
             const pastedValue3 = "unrecognized2";
             const pastedValue4 = item4.title;
 
-            handlePaste([pastedValue1, pastedValue2, pastedValue3, pastedValue4]);
+            React.act(() => {
+                handlePaste([pastedValue1, pastedValue2, pastedValue3, pastedValue4]);
+            });
 
             assert.isTrue(onItemsPaste.calledOnce);
             // Emits just the 2 valid items.
@@ -325,7 +329,10 @@ describe("<QueryList>", () => {
             // Paste this item last.
             const pastedValue3 = "unrecognized";
 
-            handlePaste([pastedValue1, pastedValue2, pastedValue3]);
+            React.act(() => {
+                handlePaste([pastedValue1, pastedValue2, pastedValue3]);
+            });
+
             const createdItem = { title: "unrecognized", rank: createdRank, year: createdYear };
 
             assert.isTrue(onItemsPaste.calledOnce);
