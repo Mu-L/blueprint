@@ -153,7 +153,9 @@ describe("<Popover>", () => {
         it("adds POPOVER_OPEN class to target when the popover is open", () => {
             wrapper = renderPopover();
             assert.isFalse(wrapper.findClass(Classes.POPOVER_TARGET).hasClass(Classes.POPOVER_OPEN));
-            wrapper.setState({ isOpen: true });
+            React.act(() => {
+                wrapper?.setState({ isOpen: true });
+            });
             assert.isTrue(wrapper.findClass(Classes.POPOVER_TARGET).hasClass(Classes.POPOVER_OPEN));
         });
 

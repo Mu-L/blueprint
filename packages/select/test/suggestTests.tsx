@@ -107,9 +107,9 @@ describe("Suggest", () => {
             const wrapper = suggest();
             const queryList = (wrapper.instance() as Suggest<Film> as any).queryList; // private ref
             const scrollActiveItemIntoViewSpy = sinon.spy(queryList, "scrollActiveItemIntoView");
-            wrapper.setState({ isOpen: false });
+            React.act(() => wrapper.setState({ isOpen: false }));
             assert.isFalse(scrollActiveItemIntoViewSpy.called);
-            wrapper.setState({ isOpen: true });
+            React.act(() => wrapper.setState({ isOpen: true }));
             assert.strictEqual(scrollActiveItemIntoViewSpy.callCount, 1, "should call scrollActiveItemIntoView");
         });
 
