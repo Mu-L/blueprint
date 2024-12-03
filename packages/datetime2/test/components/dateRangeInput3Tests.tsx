@@ -20,7 +20,7 @@ import * as Locales from "date-fns/locale";
 import esLocale from "date-fns/locale/es";
 import { mount, type ReactWrapper } from "enzyme";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 import * as TestUtils from "react-dom/test-utils";
 import * as sinon from "sinon";
 
@@ -88,7 +88,7 @@ describe("<DateRangeInput3>", () => {
 
     afterEach(() => {
         if (containerElement !== undefined) {
-            ReactDOM.unmountComponentAtNode(containerElement);
+            ReactDOM.createRoot(containerElement).unmount();
             containerElement.remove();
         }
     });

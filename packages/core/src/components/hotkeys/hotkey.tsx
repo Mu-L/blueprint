@@ -22,7 +22,7 @@ import type { HotkeyConfig } from "../../hooks";
 
 import { KeyComboTag } from "./keyComboTag";
 
-export type HotkeyProps = Props & HotkeyConfig;
+export type HotkeyProps = React.PropsWithChildren<Props & HotkeyConfig>;
 
 /**
  * Hotkey component used to display a hotkey in the HotkeysDialog.

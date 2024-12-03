@@ -110,10 +110,7 @@ export interface IconComponent extends React.FC<IconProps<Element>> {
  * @see https://blueprintjs.com/docs/#core/components/icon
  */
 // eslint-disable-next-line prefer-arrow-callback
-export const Icon: IconComponent = React.forwardRef(function <T extends Element>(
-    props: IconProps<T>,
-    ref: React.Ref<T>,
-) {
+export const Icon = React.forwardRef(function <T extends Element>(props: IconProps<T>, ref: React.Ref<T>) {
     const { autoLoad, className, color, icon, intent, tagName, svgProps, title, htmlTitle, ...htmlProps } = props;
 
     // Preserve Blueprint v4.x behavior: iconSize prop takes predecence, then size prop, then fall back to default value
@@ -187,11 +184,8 @@ export const Icon: IconComponent = React.forwardRef(function <T extends Element>
         });
     } else {
         const pathElements = iconPaths.map((d, i) => <path d={d} key={i} fillRule="evenodd" />);
-        // HACKHACK: there is no good way to narrow the type of SVGIconContainerProps here because of the use
-        // of a conditional type within the type union that defines that interface. So we cast to <any>.
-        // see https://github.com/microsoft/TypeScript/issues/24929, https://github.com/microsoft/TypeScript/issues/33014
         return (
-            <SVGIconContainer<any>
+            <SVGIconContainer
                 children={pathElements}
                 // don't forward `Classes.ICON` or `Classes.iconClass(icon)` here, since the container will render those classes
                 className={classNames(Classes.intentClass(intent), className)}

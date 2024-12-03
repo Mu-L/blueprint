@@ -248,7 +248,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = React.forwardRef<any, Con
                     onContextMenu: handleContextMenu,
                     ref: mergeRefs(childRef, userRef),
                     ...restProps,
-                },
+                } as any,
                 children,
             )}
         </>

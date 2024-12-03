@@ -16,7 +16,7 @@
 
 import { expect } from "chai";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 
 import { Utils } from "../src";
 import { Grid } from "../src/common/grid";
@@ -36,6 +36,7 @@ describe("Locator", () => {
 
     let locator: Locator;
     let containerElement: HTMLElement;
+    let root: ReactDOM.Root;
 
     beforeEach(() => {
         // for some reason, the height is only 18px by default. need to manually increase it to fit
@@ -55,7 +56,8 @@ describe("Locator", () => {
         // ".body" will be the scrollable region.
         containerElement = document.createElement("div");
         document.body.appendChild(containerElement);
-        ReactDOM.render(
+        root = ReactDOM.createRoot(containerElement);
+        root.render(
             <div className="table-wrapper" style={style}>
                 <div className="body" style={style}>
                     <div className="body-client" style={style}>
@@ -63,7 +65,6 @@ describe("Locator", () => {
                     </div>
                 </div>
             </div>,
-            containerElement,
         );
 
         locator = new LocatorImpl(
@@ -75,7 +76,7 @@ describe("Locator", () => {
     });
 
     afterEach(() => {
-        ReactDOM.unmountComponentAtNode(containerElement);
+        root.unmount();
     });
 
     it("constructs", () => {

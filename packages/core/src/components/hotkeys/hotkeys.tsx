@@ -40,7 +40,7 @@ export interface HotkeysProps extends Props {
  * Hotkeys component used to display a list of hotkeys in the HotkeysDialog.
  * Should not be used by consumers directly.
  */
-export class Hotkeys extends AbstractPureComponent<HotkeysProps> {
+export class Hotkeys extends AbstractPureComponent<React.PropsWithChildren<HotkeysProps>> {
     public static displayName = `${DISPLAYNAME_PREFIX}.Hotkeys`;
 
     public static defaultProps = {

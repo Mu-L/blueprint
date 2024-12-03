@@ -16,7 +16,7 @@
 
 import { expect } from "chai";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 
 import * as ScrollUtils from "../../../src/common/internal/scrollUtils";
 import { type Region, Regions } from "../../../src/regions";
@@ -338,12 +338,13 @@ describe("scrollUtils", () => {
         });
 
         function mountElementsWithContentSize(contentWidth: number, contentHeight: number) {
+            const root = ReactDOM.createRoot(containerElement!);
+
             // HACKHACK: `as unknown as HTMLElement` cast is sketchy
-            return ReactDOM.render<React.HTMLProps<HTMLDivElement>>(
+            return root.render(
                 <div style={parentStyle}>
                     <div style={{ ...baseStyles, width: contentWidth, height: contentHeight }} />
                 </div>,
-                containerElement!,
             ) as unknown as HTMLElement;
         }
     });

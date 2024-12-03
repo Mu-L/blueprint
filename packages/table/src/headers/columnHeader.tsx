@@ -60,6 +60,8 @@ export interface ColumnHeaderProps extends HeaderProps, ColumnWidths, ColumnIndi
      * Called on component mount.
      */
     onMount?: (whichHeader: "column" | "row") => void;
+
+    children?: React.ReactNode;
 }
 
 export class ColumnHeader extends React.Component<ColumnHeaderProps> {

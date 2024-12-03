@@ -46,7 +46,7 @@ export interface SVGIconContainerComponent extends React.FC<SVGIconContainerProp
 }
 
 // eslint-disable-next-line prefer-arrow-callback
-export const SVGIconContainer: SVGIconContainerComponent = React.forwardRef(function <T extends Element>(
+export const SVGIconContainer = React.forwardRef(function <T extends Element>(
     props: SVGIconContainerProps<T>,
     ref: React.Ref<T>,
 ) {
