@@ -17,7 +17,7 @@
 /* eslint-disable  max-classes-per-file */
 
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom/client";
 
 import { BlueprintProvider } from "@blueprintjs/core";
 
@@ -208,19 +208,22 @@ export class ElementHarness {
 export class ReactHarness {
     private container: HTMLElement;
 
+    private root: ReactDOM.Root;
+
     constructor() {
         this.container = document.createElement("div");
         document.body.appendChild(this.container);
+        this.root = ReactDOM.createRoot(this.container);
     }
 
     public mount(component: React.ReactElement<any>) {
         // wrap in a root provider to avoid console warnings
-        ReactDOM.render(React.createElement(BlueprintProvider, { children: component }), this.container);
+        this.root.render(React.createElement(BlueprintProvider, { children: component }));
         return new ElementHarness(this.container);
     }
 
     public unmount() {
-        ReactDOM.unmountComponentAtNode(this.container);
+        this.root.unmount();
     }
 
     public destroy() {

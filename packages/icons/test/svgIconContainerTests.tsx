@@ -11,7 +11,7 @@ describe("SVGIconContainer", () => {
     it("accepts generic type param specifying the type of the root element", () => {
         const handleClick: React.MouseEventHandler<HTMLSpanElement> = () => undefined;
         mount(
-            <SVGIconContainer<HTMLSpanElement> iconName="add" onClick={handleClick}>
+            <SVGIconContainer iconName="add" onClick={handleClick}>
                 <path />
             </SVGIconContainer>,
         );

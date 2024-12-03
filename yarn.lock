@@ -538,10 +538,10 @@ __metadata:
     karma: "npm:^6.4.2"
     mocha: "npm:^10.2.0"
     npm-run-all: "npm:^4.1.5"
-    react: "npm:^18.3.1"
+    react: "npm:^17.0.2"
     react-day-picker: "npm:7.4.9"
-    react-dom: "npm:^18.3.1"
-    react-test-renderer: "npm:^18.3.1"
+    react-dom: "npm:^17.0.2"
+    react-test-renderer: "npm:^17.0.2"
     tslib: "npm:~2.6.2"
     typescript: "npm:~5.3.3"
     webpack-cli: "npm:^5.1.4"
@@ -13443,6 +13443,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-dom@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-dom@npm:17.0.2"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    object-assign: "npm:^4.1.1"
+    scheduler: "npm:^0.20.2"
+  peerDependencies:
+    react: 17.0.2
+  checksum: 51abbcb72450fe527ebf978c3bc989ba266630faaa53f47a2fae5392369729e8de62b2e4683598cbe651ea7873cd34ec7d5127e2f50bf4bfe6bd0c3ad9bddcb0
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -13486,7 +13499,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^17.0.1":
+"react-is@npm:^17.0.1, react-is@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
@@ -13521,7 +13534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-shallow-renderer@npm:^16.15.0":
+"react-shallow-renderer@npm:^16.13.1, react-shallow-renderer@npm:^16.15.0":
   version: 16.15.0
   resolution: "react-shallow-renderer@npm:16.15.0"
   dependencies:
@@ -13530,6 +13543,20 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: c194d741792e86043a4ae272f7353c1cb9412bc649945c4220c6a101a6ea5410cceb3d65d5a4d750f11a24f7426e8eec7977e8a4e3ad5d3ee235ca2b18166fa8
+  languageName: node
+  linkType: hard
+
+"react-test-renderer@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react-test-renderer@npm:17.0.2"
+  dependencies:
+    object-assign: "npm:^4.1.1"
+    react-is: "npm:^17.0.2"
+    react-shallow-renderer: "npm:^16.13.1"
+    scheduler: "npm:^0.20.2"
+  peerDependencies:
+    react: 17.0.2
+  checksum: a4ea1e745a87bb9015540d96a3077b614bf88e306a0edd639f8fb849a393fa5104e84eca4349bc4b026f2f0b115a4172d58950d7076316115795266557659276
   languageName: node
   linkType: hard
 
@@ -13573,6 +13600,16 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 8aa30e92ee03561d25779c68ba6d9409ba4ea83386a8798729b6eb5977bbdc4a5ff199b758d2a29e958d7560b2a7517cab8671932b83e8fcd50092631c209b4c
+  languageName: node
+  linkType: hard
+
+"react@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "react@npm:17.0.2"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    object-assign: "npm:^4.1.1"
+  checksum: 07ae8959acf1596f0550685102fd6097d461a54a4fd46a50f88a0cd7daaa97fdd6415de1dcb4bfe0da6aa43221a6746ce380410fa848acc60f8ac41f6649c148
   languageName: node
   linkType: hard
 
@@ -14070,6 +14107,16 @@ __metadata:
   version: 1.2.4
   resolution: "sax@npm:1.2.4"
   checksum: 6e9b05ff443ee5e5096ce92d31c0740a20d33002fad714ebcb8fc7a664d9ee159103ebe8f7aef0a1f7c5ecacdd01f177f510dff95611c589399baf76437d3fe3
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.20.2":
+  version: 0.20.2
+  resolution: "scheduler@npm:0.20.2"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    object-assign: "npm:^4.1.1"
+  checksum: b0982e4b0f34f4ffa4f2f486161c0fd9ce9b88680b045dccbf250eb1aa4fd27413570645455187a83535e2370f5c667a251045547765408492bd883cbe95fcdb
   languageName: node
   linkType: hard
 

@@ -69,6 +69,8 @@ export interface HTMLSelectProps
 
     /** Controlled value of this component. */
     value?: string | number;
+
+    placeholder?: string;
 }
 
 // this component is simple enough that tests would be purely tautological.
