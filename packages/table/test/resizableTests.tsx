@@ -36,7 +36,9 @@ class ResizableDiv extends React.Component<ResizableDivProps> {
         return (
             <div className="resizable-div" style={style}>
                 Yo
-                {this.props.resizeHandle}
+                {this.props.resizeHandle && React.isValidElement(this.props.resizeHandle)
+                    ? this.props.resizeHandle
+                    : null}
             </div>
         );
     }

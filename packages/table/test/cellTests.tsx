@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { render, screen } from "@testing-library/react";
 import { expect } from "chai";
 import * as React from "react";
 
@@ -22,45 +23,44 @@ import { Classes as CoreClasses, Intent } from "@blueprintjs/core";
 import { Cell } from "../src/cell/cell";
 import * as Classes from "../src/common/classes";
 
-import { CellType, expectCellLoading } from "./cellTestUtils";
-import { ReactHarness } from "./harness";
-
 describe("Cell", () => {
-    const harness = new ReactHarness();
-
-    afterEach(() => {
-        harness.unmount();
-    });
-
-    after(() => {
-        harness.destroy();
-    });
-
     it("displays regular content", () => {
-        const cell = harness.mount(
+        render(
             <Cell>
                 <div className="inner">Purple</div>
             </Cell>,
         );
-        expect(cell.find(".inner")!.text()).to.equal("Purple");
+        expect(screen.getByText("Purple")).to.exist;
     });
 
     it("renders loading state", () => {
-        const cellHarness = harness.mount(<Cell loading={true} />);
-        expectCellLoading(cellHarness.element!.children[0], CellType.BODY_CELL);
+        const { container } = render(<Cell loading={true}>test</Cell>);
+
+        expect(screen.queryByText("test")).to.not.exist;
+        expect(container.querySelector(`.${Classes.TABLE_CELL}.${CoreClasses.LOADING}`)).to.exist;
     });
 
-    it("uses intents for styling", () => {
-        const cell0 = harness.mount(<Cell intent={Intent.PRIMARY}>Dangerous</Cell>);
-        expect(cell0.find(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_PRIMARY}`)!.element).to.exist;
+    it("uses primary intent for styling", () => {
+        const { container } = render(<Cell intent={Intent.PRIMARY}>Dangerous</Cell>);
 
-        const cell1 = harness.mount(<Cell intent={Intent.SUCCESS}>Dangerous</Cell>);
-        expect(cell1.find(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_SUCCESS}`)!.element).to.exist;
+        expect(container.querySelector(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_PRIMARY}`)).to.exist;
+    });
 
-        const cell2 = harness.mount(<Cell intent={Intent.WARNING}>Dangerous</Cell>);
-        expect(cell2.find(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_WARNING}`)!.element).to.exist;
+    it("uses success intent for styling", () => {
+        const { container } = render(<Cell intent={Intent.SUCCESS}>Dangerous</Cell>);
 
-        const cell3 = harness.mount(<Cell intent={Intent.DANGER}>Dangerous</Cell>);
-        expect(cell3.find(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_DANGER}`)!.element).to.exist;
+        expect(container.querySelector(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_SUCCESS}`)).to.exist;
+    });
+
+    it("uses warning intent for styling", () => {
+        const { container } = render(<Cell intent={Intent.WARNING}>Dangerous</Cell>);
+
+        expect(container.querySelector(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_WARNING}`)).to.exist;
+    });
+
+    it("uses danger intent for styling", () => {
+        const { container } = render(<Cell intent={Intent.DANGER}>Dangerous</Cell>);
+
+        expect(container.querySelector(`.${Classes.TABLE_CELL}.${CoreClasses.INTENT_DANGER}`)).to.exist;
     });
 });
