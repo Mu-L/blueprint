@@ -111,7 +111,18 @@ export interface IconComponent extends React.FC<IconProps<Element>> {
  */
 // eslint-disable-next-line prefer-arrow-callback
 export const Icon = React.forwardRef(function <T extends Element>(props: IconProps<T>, ref: React.Ref<T>) {
-    const { autoLoad, className, color, icon, intent, tagName, svgProps, title, htmlTitle, ...htmlProps } = props;
+    const {
+        autoLoad = true,
+        className,
+        color,
+        icon,
+        intent,
+        tagName = "span",
+        svgProps,
+        title,
+        htmlTitle,
+        ...htmlProps
+    } = props;
 
     // Preserve Blueprint v4.x behavior: iconSize prop takes predecence, then size prop, then fall back to default value
     // eslint-disable-next-line deprecation/deprecation
@@ -205,8 +216,4 @@ export const Icon = React.forwardRef(function <T extends Element>(props: IconPro
         );
     }
 }) as IconComponent;
-Icon.defaultProps = {
-    autoLoad: true,
-    tagName: "span",
-};
 Icon.displayName = `${DISPLAYNAME_PREFIX}.Icon`;
