@@ -5,3 +5,4 @@ dist/
 /site/
 yarn.lock
 changelog/
+packages/node-build-scripts/src/__tests__/__fixtures__/expected/variables.scss
