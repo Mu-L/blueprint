@@ -30,17 +30,12 @@ interface ResizableDivProps {
     style?: React.CSSProperties;
 }
 
-class ResizableDiv extends React.Component<ResizableDivProps> {
-    public render() {
-        const { style } = this.props;
-        return (
-            <div className="resizable-div" style={style}>
-                Yo
-                {this.props.resizeHandle}
-            </div>
-        );
-    }
-}
+const ResizableDiv: React.FC<ResizableDivProps> = ({ resizeHandle, style }) => (
+    <div className="resizable-div" style={style}>
+        Yo
+        {resizeHandle && React.isValidElement(resizeHandle) ? resizeHandle : null}
+    </div>
+);
 
 describe("Resizable", () => {
     const harness = new ReactHarness();
